@@ -1,0 +1,13 @@
+.contentContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  background: darkgray;
+}
+
+.welcomeHeader {
+  color: blue;
+}
