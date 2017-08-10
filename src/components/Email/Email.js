@@ -5,7 +5,6 @@ import Divider from 'material-ui/Divider';
 import styles from './styles.css';
 
 const Email = ({ email, isLast }) => {
-  console.log( isLast );
   return (
     <div>
       <div className={ styles.emailContainer }>

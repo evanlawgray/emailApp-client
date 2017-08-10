@@ -26,7 +26,7 @@ const EmailList = ({ emails }) => {
       {
         emails ?
           emails.map( ( email, i ) => {
-            return <Email email={ email } isLast={ i === emails.length -1 } />
+            return <Email email={ email } isLast={ i === emails.length -1 } key={ Date.now() + i } />
           }) :
           <h3>No messages to display...</h3>
       }

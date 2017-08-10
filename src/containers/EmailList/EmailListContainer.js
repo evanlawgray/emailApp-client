@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
+import { getEmails } from '../../redux/actions';
+
 import EmailList from './EmailList';
 
 const emails = [
@@ -47,11 +51,30 @@ const emails = [
 ];
 
 class EmailListContainer extends Component {
+
+  componentDidMount() {
+    this.props.getEmails(1);
+  }
+
   render() {
     return(
-      <EmailList emails={ emails } />
+      <EmailList emails={ this.props.emails } />
     );
   }
 }
 
-export default EmailListContainer;
+function mapStateToProps(state) {
+  return {
+    emails: state.emails
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getEmails: ( userId ) => {
+      dispatch(getEmails( userId ))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmailListContainer);
