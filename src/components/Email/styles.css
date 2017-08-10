@@ -1,0 +1,10 @@
+.emailContainer {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.fullWidth {
+  width: 100%;
+}
