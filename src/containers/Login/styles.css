@@ -1,0 +1,24 @@
+.contentContainer {
+  height: 75vh;
+  margin: 0;
+  padding: 70px;
+  background: #FFFEF9;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.fieldsContainer {
+  padding: 10px 0;
+}
+
+.buttonContainer {
+  margin: 10px 0 0;
+}

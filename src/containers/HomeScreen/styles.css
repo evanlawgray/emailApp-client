@@ -1,11 +1,11 @@
 .contentContainer {
   width: 100vw;
   height: auto;
+  background: #FFFEF9;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  background: #FFFEF9;
 }
 
 .welcomeHeader {

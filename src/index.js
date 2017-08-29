@@ -15,18 +15,23 @@ import store from './redux/store';
 
 import styles from './styles/index.css';
 
+import MainLayout from './containers/MainLayout';
 import App from './containers/App';
 import HomeScreen from './containers/HomeScreen';
+import Login from './containers/Login';
 
 ReactDOM.render(
   <Provider store={ store }>
     <MuiThemeProvider muiTheme={ muiTheme }>
       <Router>
-        <App>
-          <Switch>
-            <Route exact path="/" component={ HomeScreen }/>
-          </Switch>
-        </App>
+        <MainLayout>
+          <App>
+            <Switch>
+              <Route exact path="/" component={ HomeScreen }/>
+              <Route path="/login" component={Login} />
+            </Switch>
+          </App>
+        </MainLayout>
       </Router>
     </MuiThemeProvider>
   </Provider>
