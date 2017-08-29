@@ -8,17 +8,19 @@ import {
   Switch
 } from 'react-router-dom';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from './styles/mui-theme';
 
 import store from './redux/store';
 
-import styles from './styles/index.css';
-
 import MainLayout from './containers/MainLayout';
 import App from './containers/App';
 import HomeScreen from './containers/HomeScreen';
 import Login from './containers/Login';
+
+injectTapEventPlugin();
 
 ReactDOM.render(
   <Provider store={ store }>

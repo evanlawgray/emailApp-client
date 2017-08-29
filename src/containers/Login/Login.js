@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import Gandalf from 'gandalf-validator';
 
@@ -8,7 +8,7 @@ import Card from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
-// import { loginUser } from '../../redux/actions';
+import { _loginUser } from '../../redux/actions';
 
 import styles from './styles.css';
 
@@ -16,16 +16,16 @@ const buttonStyles = {
   height: '50px',
   width: '130px',
   margin: '0',
-  padding: 10
+  padding: '10px'
 }
 
 const formContainerStyles = {
   height: 'auto',
-  width: 500,
+  width: '500px',
   margin: '0 auto',
   marginTop: '10%',
-  padding: '20',
-  paddingTop: '30',
+  padding: '20px',
+  paddingTop: '30px',
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'space-around',
@@ -61,6 +61,14 @@ class Login extends Gandalf {
     this.buildFields(fieldDefinitions);
   }
 
+  handleLogin() {
+    const data = this.getCleanFormData();
+
+    if( !data ) return;
+
+    this.props.loginUser( data );
+  }
+
   render() {
     const fields = this.state.fields;
     return (
@@ -78,6 +86,7 @@ class Login extends Gandalf {
               <FlatButton
                 label={'Login'}
                 style={buttonStyles}
+                onTouchTap={() => this.handleLogin()}
               />
               <FlatButton
                 label={'Sign Up'}
@@ -91,4 +100,17 @@ class Login extends Gandalf {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn,
+    user:state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loginUser: (userInfo) => dispatch(_loginUser( userInfo ))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,23 +1,57 @@
 export const GET_EMAILS = 'GET_EMAILS';
+export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING';
+export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
+export const LOGIN_USER = 'LOGIN_USER';
 
-const rootUrl = 'http://localhost:3001/api';
+const rootUrl = 'http://localhost:3001/';
 
-export const getEmails = ( userId ) => {
-  return ( dispatch ) => {
-    fetch( `${ rootUrl }/emails/${ userId }` )
-    .then( response => {
-      if ( !response.ok ) return Promise.reject();
-      return response.json();
-    })
-    .then( json => {
-      dispatch(
-        {
-          type: GET_EMAILS,
-          payload: {
-            emails: [...json]
-          }
+const loginUserLoading = () => ({type: LOGIN_USER_LOADING});
+const loginUserError = ( userInfo ) => ({type: LOGIN_USER_ERROR});
+const loginUser = ( userInfo ) => ({type: LOGIN_USER, payload: userInfo});
+
+export const getEmails = ( userId ) => ( dispatch ) => {
+  fetch( `${ rootUrl }/api/emails/${ userId }` )
+  .then( response => {
+    if ( !response.ok ) return Promise.reject();
+    return response.json();
+  })
+  .then( json => {
+    dispatch(
+      {
+        type: GET_EMAILS,
+        payload: {
+          emails: [...json]
         }
-      )
-    });
-  }
+      }
+    )
+  });
+}
+
+export const _loginUser = ( userInfo ) => ( dispatch ) => {
+  dispatch( loginUserLoading() );
+
+  const headers = new Headers({
+    'Content-Type': 'application/json'
+  });
+
+  const payload = JSON.stringify({
+    ...userInfo
+  });
+
+  const init = {
+    method: 'POST',
+    headers: headers,
+    body: payload,
+    cache: 'default',
+    credentials: 'true'
+  };
+
+  const request = new Request( `${rootUrl}auth/login`,init );
+
+  fetch( request )
+  .then( response => {
+    if( !response.ok ) return Promise.reject();
+    console.log(response.headers);
+    return response.text();
+  })
 }
