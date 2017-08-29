@@ -6,7 +6,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 const rootUrl = 'http://localhost:3001/';
 
 const loginUserLoading = () => ({type: LOGIN_USER_LOADING});
-const loginUserError = ( userInfo ) => ({type: LOGIN_USER_ERROR});
+const loginUserError = ( error ) => ({type: LOGIN_USER_ERROR, payload: error});
 const loginUser = ( userInfo ) => ({type: LOGIN_USER, payload: userInfo});
 
 export const getEmails = ( userId ) => ( dispatch ) => {
@@ -51,7 +51,9 @@ export const _loginUser = ( userInfo ) => ( dispatch ) => {
   fetch( request )
   .then( response => {
     if( !response.ok ) return Promise.reject();
-    console.log(response.headers);
     return response.text();
-  })
+  }).then( userInfo => {
+    console.log('console says:', userInfo)
+    dispatch( loginUser(`${userInfo}`));
+  }).catch( error => dispatch( loginUserError( error ) ) );
 }

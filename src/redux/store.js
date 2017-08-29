@@ -3,11 +3,12 @@ import thunk from 'redux-thunk';
 
 import reduxLogger from 'redux-logger';
 
-import { emailsReducer } from './reducer';
+import { emailsReducer, authReducer } from './reducer';
 
 export default createStore(
   combineReducers({
-    emails: emailsReducer
+    emails: emailsReducer,
+    user: authReducer
   }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(
