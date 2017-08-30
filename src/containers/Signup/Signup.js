@@ -9,14 +9,14 @@ import Card from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
-import { _loginUser } from '../../redux/actions';
-
 import styles from './styles.css';
+
+import { _signupUser } from '../../redux/actions';
 
 const buttonStyles = {
   height: '50px',
   width: '130px',
-  margin: '0',
+  margin: '0 auto',
   padding: '10px'
 }
 
@@ -35,6 +35,16 @@ const formContainerStyles = {
 class Login extends Gandalf {
   componentWillMount() {
     const fieldDefinitions = [
+      {
+        name: 'username',
+        component: TextField,
+        validators: ['required'],
+        errorPropName: 'errorText',
+        props: {
+          hintText: 'Username',
+        },
+        debounce: 300
+      },
       {
         name: 'email',
         component: TextField,
@@ -61,12 +71,12 @@ class Login extends Gandalf {
     this.buildFields(fieldDefinitions);
   }
 
-  handleLogin() {
+  handleSignup() {
     const data = this.getCleanFormData();
 
     if( !data ) return;
 
-    this.props.loginUser( data );
+    this.props.signupUser( data );
   }
 
   render() {
@@ -78,23 +88,17 @@ class Login extends Gandalf {
             <h2>Enter Your Login Details</h2>
 
             <div className={styles.fieldsContainer}>
+              {fields.username.element} <br />
               {fields.email.element} <br />
               {fields.password.element} <br />
             </div>
 
             <section className={styles.buttonContainer}>
               <FlatButton
-                label={'Login'}
+                label={'Submit'}
                 style={buttonStyles}
-                onTouchTap={() => this.handleLogin()}
+                onTouchTap={() => this.handleSignup()}
               />
-
-              <Link to={'/signup'}>
-                <FlatButton
-                  label={'Sign Up'}
-                  style={buttonStyles}
-                />
-              </Link>
             </section>
           </form>
         </Card>
@@ -112,7 +116,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: (userInfo) => dispatch(_loginUser( userInfo ))
+    signupUser: (userInfo) => dispatch( _signupUser(userInfo) )
   }
 }
 
