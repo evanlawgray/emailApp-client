@@ -11,7 +11,7 @@ import TextField from 'material-ui/TextField';
 
 import styles from './styles.css';
 
-import { _signupUser } from '../../redux/actions';
+import { _signupUser } from '../../redux/modules/auth';
 
 const buttonStyles = {
   height: '50px',

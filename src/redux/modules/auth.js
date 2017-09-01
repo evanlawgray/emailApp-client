@@ -1,5 +1,3 @@
-export const GET_EMAILS = 'GET_EMAILS';
-
 export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING';
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 export const LOGIN_USER = 'LOGIN_USER';
@@ -17,24 +15,6 @@ const loginUser = ( userInfo ) => ({type: LOGIN_USER, payload: userInfo});
 const signupUserLoading = () => ({type: SIGNUP_USER_LOADING});
 const signupUserError = ( error ) => ({type: SIGNUP_USER_ERROR, payload: error});
 const signupUser = ( message ) => ({type: SIGNUP_USER, payload: message});
-
-export const getEmails = ( userId ) => ( dispatch ) => {
-  fetch( `${ rootUrl }api/emails/${ userId }` )
-  .then( response => {
-    if ( !response.ok ) return Promise.reject();
-    return response.json();
-  })
-  .then( json => {
-    dispatch(
-      {
-        type: GET_EMAILS,
-        payload: {
-          emails: [...json]
-        }
-      }
-    )
-  });
-}
 
 export const _loginUser = ( userInfo ) => ( dispatch ) => {
   dispatch( loginUserLoading() );

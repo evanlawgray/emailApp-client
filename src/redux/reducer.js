@@ -1,12 +1,15 @@
 import {
-  GET_EMAILS,
+  GET_EMAILS
+ } from './modules/fetchEmails.js';
+
+import {
   LOGIN_USER,
   LOGIN_USER_ERROR,
   LOGIN_USER_LOADING,
   SIGNUP_USER,
   SIGNUP_USER_ERROR,
   SIGNUP_USER_LOADING
-} from './actions.js';
+} from './modules/auth.js';
 
 const initialState = [];
 

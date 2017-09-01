@@ -9,7 +9,7 @@ import Card from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 
-import { _loginUser } from '../../redux/actions';
+import { _loginUser } from '../../redux/modules/auth';
 
 import styles from './styles.css';
 

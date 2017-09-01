@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { getEmails } from '../../redux/actions';
+import { getEmails } from '../../redux/modules/fetchEmails';
 
 import EmailList from './EmailList';
 
