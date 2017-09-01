@@ -1,6 +1,8 @@
 
 const rootUrl = 'http://localhost:3001/';
 
+const initialState = [];
+
 export const GET_EMAILS = 'GET_EMAILS';
 
 export const getEmails = ( userId ) => ( dispatch ) => {
@@ -19,4 +21,15 @@ export const getEmails = ( userId ) => ( dispatch ) => {
       }
     )
   });
+}
+
+// REDUCER
+
+export function emailsReducer( state=initialState, action ) {
+  switch( action.type ) {
+    case GET_EMAILS:
+      return [...action.payload.emails];
+    default:
+      return state;
+  }
 }
