@@ -1,6 +1,7 @@
 .contentContainer {
   width: 100vw;
   height: auto;
+  padding-top: 65px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;

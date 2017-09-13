@@ -6,11 +6,12 @@ import styles from './styles.css';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
+const appBarStyles = { position: 'fixed', zIndex: '1000000' };
 const buttonStyles = { color: 'white', marginBottom: '15px', textTransform: 'uppercase' };
 
 const HeaderBar = () => (
   <AppBar
-    className={styles.headerBar}
+    style={ appBarStyles }
     title="Email Client"
     iconElementRight={
       <div>

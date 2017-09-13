@@ -6,7 +6,8 @@ import Email from '../../components/Email';
 
 const listStyles = {
   height: 'auto',
-  width: 600,
+  width: '90%',
+  maxWidth: 700,
   margin: '0 auto',
   padding: 30,
   display: 'flex',
@@ -29,6 +30,8 @@ const EmailList = ({ emails }) => {
           }) :
           <h3>No messages to display...</h3>
       }
+
+
     </Paper>
   )
 }

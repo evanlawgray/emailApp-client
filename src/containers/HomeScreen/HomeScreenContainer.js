@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 import EmailListContainer from '../EmailList';
 
 import styles from './styles.css';
 
 class HomeScreenContainer extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      signedIn: true
-    }
-  }
 
   render() {
     return (
       <div className={ styles.contentContainer }>
-        <h2 className={ styles.welcomeHeader }>Hello, Welcome to your email client</h2>
         {
-          this.state.signedIn ?
+          this.props.userInfo.isLoggedIn ?
             <EmailListContainer /> :
             <h3 className={ styles.welcomeHeader }>Please sign in to view your messages...</h3>
         }
@@ -28,4 +22,10 @@ class HomeScreenContainer extends Component {
   }
 }
 
-export default HomeScreenContainer;
+function mapStateToProps( state ) {
+  return {
+    userInfo: state.user
+  }
+}
+
+export default connect(mapStateToProps)(HomeScreenContainer);
