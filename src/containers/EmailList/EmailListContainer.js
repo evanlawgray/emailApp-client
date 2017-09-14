@@ -55,7 +55,7 @@ class EmailListContainer extends Component {
 
         <EmailList emails={ this.props.emails } />
         <FloatingActionButton
-          style={{ position: 'absolute', right: '10%', bottom: '5%' }}
+          style={{ position: 'fixed', right: '10%', bottom: '5%' }}
           onTouchTap={() => this.showCompositionView()}
         >
           <CreateIcon />

@@ -44,7 +44,6 @@ export const _loginUser = ( userInfo ) => ( dispatch ) => {
       if( !response.ok ) return Promise.reject();
       return response.text();
     }).then( userInfo => {
-      console.log('console says:', userInfo)
       dispatch( loginUser(`${userInfo}`));
     }).catch( error => dispatch( loginUserError( error ) ) );
 }

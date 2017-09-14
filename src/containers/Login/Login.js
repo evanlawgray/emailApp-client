@@ -67,6 +67,10 @@ class Login extends Gandalf {
     if( !data ) return;
 
     this.props.loginUser( data );
+
+    console.log(this.context);
+
+    // this.context.router.push('/');
   }
 
   render() {

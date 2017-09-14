@@ -10,8 +10,8 @@ const EmailTextArea = () => {
       name="textarea"
       rows="10"
       cols="50"
+      placeholder="Write your message here..."
     >
-      Write your message here
     </textarea>
   )
 }

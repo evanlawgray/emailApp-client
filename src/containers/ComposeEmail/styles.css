@@ -9,6 +9,7 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  animation: fadeIn 300ms ease;
 }
 
 .composeForm {
@@ -42,4 +43,14 @@
 
 .buttonContainer {
   margin: 20px 0 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
