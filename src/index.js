@@ -20,7 +20,7 @@ import store from './redux/store';
 import MainLayout from './containers/MainLayout';
 import App from './containers/App';
 import HomeScreen from './containers/HomeScreen';
-import Login from './containers/Login';
+import LoginContainer from './containers/Login';
 import Signup from './containers/Signup';
 
 injectTapEventPlugin();
@@ -33,7 +33,7 @@ ReactDOM.render(
           <App>
             <Switch>
               <Route exact path="/" component={ HomeScreen }/>
-              <Route path="/login" component={Login} />
+              <Route path="/login" component={LoginContainer} />
               <Route path="/signup" component={Signup} />
             </Switch>
           </App>

@@ -67,10 +67,6 @@ class Login extends Gandalf {
     if( !data ) return;
 
     this.props.loginUser( data );
-
-    console.log(this.context);
-
-    // this.context.router.push('/');
   }
 
   render() {
@@ -107,10 +103,10 @@ class Login extends Gandalf {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ( state ) => {
   return {
-    isLoggedIn: state.isLoggedIn,
-    user:state.user
+    isLoggedIn: state.user.isLoggedIn,
+    user: state.user
   }
 }
 
