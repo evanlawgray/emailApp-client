@@ -9,7 +9,7 @@ import CreateIcon from 'material-ui/svg-icons/content/create'
 
 import styles from './styles.css';
 
-import ComposeEmail from '../ComposeEmail/index';
+import ComposeEmailContainer from '../ComposeEmail/index';
 import EmailList from './EmailList';
 
 const authCookie = 'email_session';
@@ -50,7 +50,7 @@ class EmailListContainer extends Component {
     return(
       <div className={ styles.contentContainer }>
         {
-          this.state.composing === true && <ComposeEmail hideSelf={ () => this.hideCompositionView() }/>
+          this.state.composing === true && <ComposeEmailContainer hideSelf={ () => this.hideCompositionView() }/>
         }
 
         <EmailList emails={ this.props.emails } />

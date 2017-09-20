@@ -1,11 +1,8 @@
 import React from 'react';
 
-import Gandalf from 'gandalf-validator';
+import { Field, reduxForm } from 'redux-form';
 
-import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-
-import EmailTextArea from '../../components/EmailTextArea';
 
 import styles from './styles.css';
 
@@ -23,72 +20,46 @@ const sendButtonStyles = {
   padding: '10px'
 }
 
-class ComposeEmail extends Gandalf {
+const ComposeEmail = ({ hideSelf }) => {
 
-  componentWillMount() {
-    const fieldDefinitions = [
-      {
-        name: 'email',
-        component: TextField,
-        validators: ['required', 'email'],
-        errorPropName: 'errorText',
-        props: {
-          hintText: 'To',
-        },
-        debounce: 300
-      },
-      {
-        name: 'subject',
-        component: TextField,
-        validators: ['required'],
-        errorPropName: 'errorText',
-        props: {
-          hintText: 'Subject'
-        }
-      }
-    ];
-
-    this.buildFields( fieldDefinitions );
-  }
-
-  handleChange( event ) {
-    const message = event.target.value;
-
-    console.log( this );
-
-    this.setState({ ...this.state, message: message });
-  }
-
-  render() {
-    const fields = this.state.fields;
-
-    return (
-      <div className={ styles.composeView }>
-        <h2>Compose</h2>
-        <form className={ styles.composeForm }>
-          <div className={ styles.metaFields }>
-            { fields.email.element }
-            { fields.subject.element }
+  return (
+    <div className={ styles.composeView }>
+      <h2>Compose</h2>
+      <form className={ styles.composeForm }>
+        <div className={ styles.metaFields }>
+          <div>
+            <Field
+              name="recipient"
+              component="input"
+              type="text"
+              placeholder="To..."
+            />
           </div>
+        </div>
 
-          <EmailTextArea value={ this.state.value } onChange={ this.handleChange }/>
+        <Field
+          name="message"
+          component="textarea"
+          placeholder="Write your message here..."
+        />
 
-          <section className={ styles.buttonContainer }>
-            <FlatButton
-              label={'Cancel'}
-              style={cancelButtonStyles}
-              onTouchTap={ this.props.hideSelf }
-            />
-            <FlatButton
-              label={'Send'}
-              style={sendButtonStyles}
+        <section className={ styles.buttonContainer }>
+          <FlatButton
+            label={'Cancel'}
+            style={cancelButtonStyles}
+            onTouchTap={ hideSelf }
+          />
+          <FlatButton
+            label={'Send'}
+            style={sendButtonStyles}
 
-            />
-          </section>
-        </form>
-      </div>
-    )
-  }
+          />
+        </section>
+      </form>
+    </div>
+  );
 }
 
-export default ComposeEmail;
+export default reduxForm({
+  form: 'composeEmailForm'
+})(ComposeEmail);
