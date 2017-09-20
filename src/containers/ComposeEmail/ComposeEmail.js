@@ -20,15 +20,16 @@ const sendButtonStyles = {
   padding: '10px'
 }
 
-const ComposeEmail = ({ hideSelf }) => {
+const ComposeEmail = ({ handleSubmit, hideSelf, pristine, reset, submitting }) => {
 
   return (
     <div className={ styles.composeView }>
       <h2>Compose</h2>
-      <form className={ styles.composeForm }>
+      <form onSubmit={ handleSubmit } className={ styles.composeForm }>
         <div className={ styles.metaFields }>
           <div>
             <Field
+              className={ styles.recipient }
               name="recipient"
               component="input"
               type="text"
@@ -38,6 +39,7 @@ const ComposeEmail = ({ hideSelf }) => {
         </div>
 
         <Field
+          className={ styles.message }
           name="message"
           component="textarea"
           placeholder="Write your message here..."
@@ -52,7 +54,6 @@ const ComposeEmail = ({ hideSelf }) => {
           <FlatButton
             label={'Send'}
             style={sendButtonStyles}
-
           />
         </section>
       </form>
@@ -61,5 +62,5 @@ const ComposeEmail = ({ hideSelf }) => {
 }
 
 export default reduxForm({
-  form: 'composeEmailForm'
+  form: 'composeEmail'
 })(ComposeEmail);

@@ -24,7 +24,7 @@
   border: 1px solid black;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: baseline
 }
 
@@ -33,12 +33,30 @@
 }
 
 .metaFields {
-  height: 120px;
   width: 100%;
   margin-bottom: 20px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
+}
+
+.recipient {
+  height: 40px;
+  width: 100%;
+  min-width: 240px;
+  outline-width: 1px;
+  border-radius: 2px;
+  border-color: #E1E1E1;
+}
+
+.message {
+  height: 70%;
+  min-height: 240px;
+  width: 100%;
+  min-width: 240px;
+  outline-width: 1px;
+  border-radius: 2px;
+  border-color: darkgray;
 }
 
 .buttonContainer {
