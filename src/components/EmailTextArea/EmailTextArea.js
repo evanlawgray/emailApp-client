@@ -3,9 +3,11 @@ import { PropTypes } from 'prop-types';
 
 import styles from './styles.css';
 
-const EmailTextArea = () => {
+const EmailTextArea = ({ value, onChange }) => {
   return (
     <textarea
+      value={ value }
+      onChange={ onChange }
       className={ styles.emailTextArea }
       name="textarea"
       rows="10"

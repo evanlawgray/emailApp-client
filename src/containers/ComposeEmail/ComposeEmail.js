@@ -51,6 +51,14 @@ class ComposeEmail extends Gandalf {
     this.buildFields( fieldDefinitions );
   }
 
+  handleChange( event ) {
+    const message = event.target.value;
+
+    console.log( this );
+
+    this.setState({ ...this.state, message: message });
+  }
+
   render() {
     const fields = this.state.fields;
 
@@ -63,7 +71,7 @@ class ComposeEmail extends Gandalf {
             { fields.subject.element }
           </div>
 
-          <EmailTextArea />
+          <EmailTextArea value={ this.state.value } onChange={ this.handleChange }/>
 
           <section className={ styles.buttonContainer }>
             <FlatButton
