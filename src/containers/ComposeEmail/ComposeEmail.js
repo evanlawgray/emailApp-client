@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+
+import { Form, Field, reduxForm } from 'redux-form';
 
 import FlatButton from 'material-ui/FlatButton';
+
+import { _sendEmail } from '../../redux/modules/sendEmail';
 
 import styles from './styles.css';
 
@@ -20,47 +25,87 @@ const sendButtonStyles = {
   padding: '10px'
 }
 
-const ComposeEmail = ({ handleSubmit, hideSelf, pristine, reset, submitting }) => {
+class ComposeEmail extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className={ styles.composeView }>
-      <h2>Compose</h2>
-      <form onSubmit={ handleSubmit } className={ styles.composeForm }>
-        <div className={ styles.metaFields }>
-          <div>
-            <Field
-              className={ styles.recipient }
-              name="recipient"
-              component="input"
-              type="text"
-              placeholder="To..."
-            />
+    this.submitEmailForm = this.submitEmailForm.bind( this );
+  }
+
+  submitEmailForm(values) {
+    const newValues = { userId: this.props.userId, ...values }
+    this.props.sendEmail( newValues );
+  }
+
+  render() {
+    return (
+      <div className={ styles.composeView }>
+        <h2>Compose</h2>
+        <Form onSubmit={ this.props.handleSubmit( this.submitEmailForm ) } className={ styles.composeForm }>
+          <div className={ styles.metaFields }>
+            <div>
+              <Field
+                className={ styles.recipient }
+                name="recipient"
+                component="input"
+                type="text"
+                placeholder="To..."
+              />
+
+              <Field
+                className={ styles.subject }
+                name="subject"
+                component="input"
+                type="text"
+                placeholder="Subject..."
+              />
+            </div>
           </div>
-        </div>
 
-        <Field
-          className={ styles.message }
-          name="message"
-          component="textarea"
-          placeholder="Write your message here..."
-        />
+          <Field
+            className={ styles.message }
+            name="message"
+            component="textarea"
+            placeholder="Write your message here..."
+          />
 
-        <section className={ styles.buttonContainer }>
-          <FlatButton
-            label={'Cancel'}
-            style={cancelButtonStyles}
-            onTouchTap={ hideSelf }
-          />
-          <FlatButton
-            label={'Send'}
-            style={sendButtonStyles}
-          />
-        </section>
-      </form>
-    </div>
-  );
+          <section className={ styles.buttonContainer }>
+            <FlatButton
+              label={ 'Cancel' }
+              style={ cancelButtonStyles }
+              onTouchTap={ this.props.hideSelf }
+            />
+            <FlatButton
+              label={ 'Send' }
+              style={ sendButtonStyles }
+              type='submit'
+            />
+          </section>
+        </Form>
+      </div>
+    );
+  }
 }
 
-export default reduxForm({
+ComposeEmail.propTypes = {
+  userId: PropTypes.number,
+  hideSelf: PropTypes.func
+}
+
+function mapStateToProps( state ) {
+  return {
+    userId: state.user.loggedInUserId,
+  }
+}
+
+function mapDispatchToProps( dispatch ) {
+  return {
+    sendEmail: (emailData) => dispatch( _sendEmail( emailData ) )
+  }
+}
+
+const connectedForm = reduxForm({
   form: 'composeEmail'
 })(ComposeEmail);
+
+export default connect(mapStateToProps, mapDispatchToProps)(connectedForm);

@@ -9,7 +9,7 @@ import CreateIcon from 'material-ui/svg-icons/content/create'
 
 import styles from './styles.css';
 
-import ComposeEmailContainer from '../ComposeEmail/index';
+import ComposeEmail from '../ComposeEmail/index';
 import EmailList from './EmailList';
 
 const authCookie = 'email_session';
@@ -29,6 +29,16 @@ class EmailListContainer extends Component {
     }
   }
 
+  componentDidMount() {
+
+    // if ( getCookie( authCookie ) ) {
+    //   this.props.getEmails( this.props.userId );
+    // }
+
+    this.props.getEmails(this.props.userInfo.loggedInUserId);
+  }
+
+
   showCompositionView() {
     this.setState({composing: true});
   }
@@ -37,20 +47,11 @@ class EmailListContainer extends Component {
     this.setState({composing: false});
   }
 
-  componentDidMount() {
-
-    // if ( getCookie( authCookie ) ) {
-    //   this.props.getEmails( this.props.userId );
-    // }
-
-    this.props.getEmails(1);
-  }
-
   render() {
     return(
       <div className={ styles.contentContainer }>
         {
-          this.state.composing === true && <ComposeEmailContainer hideSelf={ () => this.hideCompositionView() }/>
+          this.state.composing === true && <ComposeEmail userId={ this.props.userInfo.userId } hideSelf={ () => this.hideCompositionView() }/>
         }
 
         <EmailList emails={ this.props.emails } />

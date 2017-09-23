@@ -24,6 +24,7 @@ class HomeScreenContainer extends Component {
 
 function mapStateToProps( state ) {
   return {
+    composeEmailForm: state.form.composeEmail,
     userInfo: state.user
   }
 }

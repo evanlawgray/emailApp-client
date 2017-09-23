@@ -41,6 +41,10 @@
 }
 
 .recipient {
+  margin-bottom: 10px;
+}
+
+.subject, .recipient {
   height: 40px;
   width: 100%;
   min-width: 240px;

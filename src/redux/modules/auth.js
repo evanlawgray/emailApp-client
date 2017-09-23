@@ -72,13 +72,10 @@ export const _signupUser = ( userInfo ) => ( dispatch ) => {
   fetch( request )
     .then( response => {
       if(!response.ok) return Promise.reject();
-
       return response.text()
     }).then( resText => {
-      console.log(resText);
-      dispatch( signupUser( resText ) )
+      dispatch( signupUser( resText ) );
     }).catch( error => {
-      console.log(error);
       dispatch( signupUserError( error ) );
     });
 }
