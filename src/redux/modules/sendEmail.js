@@ -40,14 +40,22 @@ export const _sendEmail = ( emailFormValues ) => ( dispatch ) => {
 
   fetch( request )
     .then( response => {
-      if( !response.ok ) return Promise.reject();
+      if( !response.ok ) {
+        const errorPromise = response.text();
+
+        return Promise.reject( errorPromise )
+      }
       return response.text();
     }).then( ( text ) => {
+
       dispatch( sendEmail( text ) );
-    })
-    .catch( error => {
-      dispatch( sendEmailError( error ) );
+    }, ( error ) => {
+      Promise.resolve( error )
+        .then( errorMessage => {
+          dispatch( sendEmailError( errorMessage ) );
+        })
     });
+
 }
 
 // Reducer
@@ -58,6 +66,7 @@ export function sendEmailReducer ( state = initialState, action ) {
       return {
         isSending: true,
         error: null,
+        success: false,
         message: null,
       }
     }
@@ -65,14 +74,16 @@ export function sendEmailReducer ( state = initialState, action ) {
       return {
         isSending: false,
         error: null,
+        success: true,
         message: action.payload
       }
     }
     case SEND_EMAIL_ERROR: {
       return {
         isSending: false,
-        error: action.payload,
-        message: null
+        error: true,
+        success: false,
+        message: action.payload
       }
     }
     default: {
