@@ -37,8 +37,6 @@ class ComposeEmail extends Component {
     }
 
     this.submitEmailForm = this.submitEmailForm.bind( this );
-    this.showFeedback = this.showFeedback.bind( this );
-
   }
 
   submitEmailForm(values) {
@@ -46,18 +44,8 @@ class ComposeEmail extends Component {
     this.props.sendEmail( newValues );
   }
 
-  showFeedback( message ) {
-    console.log( 'THIS IS !!!!!!!!!!!!!!!!!!!!!!!!', this.state.message, this.state.showFeedback )
-    this.setState({ composeEmailFeedback: message, showFeedback: true }, () => {
-      console.log( 'NOW IT IS !!!!!!!!!!!!!!!!!!!!!!!!', this.state.message, this.state.showFeedback )
-    });
-
-    setTimeout( this.setState({
-      showFeedback: false
-    }), 1500 );
-  }
-
   componentDidUpdate( prevProps, prevState ) {
+    console.log( 'SHOW FEEDBACK!!!:', this.state.showFeedback )
     if( this.state.composeEmailFeedback && this.state.composeEmailFeedback !== prevState.composeEmailFeedback ) {
       this.setState({
         showFeedback: true
@@ -70,7 +58,7 @@ class ComposeEmail extends Component {
       });
 
       this.props.sendEmailInfo.success && this.props.hideSelf();
-    }, 9500);
+    }, 6500);
 
   }
 
@@ -84,8 +72,6 @@ class ComposeEmail extends Component {
       });
     }
 
-    console.log();
-
     if(!success && message) {
       this.setState({
         composeEmailFeedback: message,
@@ -96,9 +82,10 @@ class ComposeEmail extends Component {
   render() {
     return (
       <div className={ styles.composeView }>
-        {
-          this.state.showFeedback && <EmailFeedback message={ this.state.composeEmailFeedback } />
-        }
+        <EmailFeedback
+          active={ this.state.showFeedback }
+          message={ this.state.composeEmailFeedback }
+        />
 
         <h2>Compose</h2>
         <Form onSubmit={ this.props.handleSubmit( this.submitEmailForm ) } className={ styles.composeForm }>

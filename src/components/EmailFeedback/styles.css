@@ -1,12 +1,8 @@
 .feedbackBox {
-  height: auto;
-  min-height: 200px;
+  height: 200px;
   width: 20%;
   max-width: 400px;
   margin: 0 auto;
-  border: 1px solid black;
-  border-radius: 5px;
-  box-shadow: -1px 5px 5px #E1E1E1;
   position: absolute;
   top: 15%;
   right: 0;
@@ -17,7 +13,37 @@
   align-items: center;
 }
 
-.feedbackBox p {
+.feedbackText {
+  height: 100%;
   width: 100%;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: -1px 5px 5px #E1E1E1;
+  position: relative;
+  top: 0;
+  right: 0;
   text-align: center;
+}
+
+.enter {
+  opacity: 0.1;
+  right: -400px;
+}
+
+.enter.enterActive {
+  opacity: 1;
+  right: 0;
+  transition: right 300ms ease-in, opacity 500ms ease-in;
+}
+
+.leave {
+  opacity: 1;
+  right: 0;
+}
+
+.leave.leaveActive {
+  opacity: 0.1;
+  right: -400px;
+  transition: right 300ms ease-in, opacity 500ms ease-in;
 }

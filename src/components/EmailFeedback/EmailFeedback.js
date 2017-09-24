@@ -1,13 +1,27 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { PropTypes } from 'prop-types';
 
 import styles from './styles.css';
 
-const EmailFeedback = ({ message }) => {
+const EmailFeedback = ({ active, message }) => {
   return (
-    <div className={ styles.feedbackBox }>
-      <p>{ message }</p>
-    </div>
+      <div className={ styles.feedbackBox }>
+        <ReactCSSTransitionGroup
+          transitionName={{
+            enter: styles.enter,
+            enterActive: styles.enterActive,
+            leave: styles.leave,
+            leaveActive: styles.leaveActive
+          }}
+          transitionEnterTimeout={ 500 }
+          transitionLeaveTimeout={ 500 }
+        >
+          {
+            active && <p key='feedbackText' className={ styles.feedbackText }>{ message }</p>
+          }
+        </ReactCSSTransitionGroup>
+      </div>
   );
 }
 
