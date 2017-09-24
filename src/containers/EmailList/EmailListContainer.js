@@ -12,13 +12,13 @@ import styles from './styles.css';
 import ComposeEmail from '../ComposeEmail/index';
 import EmailList from './EmailList';
 
-const authCookie = 'email_session';
+// const authCookie = 'email_session';
 
-function getCookie( name ) {
-  var value = "; " + document.cookie;
-  var parts = value.split( "; " + name + "=" );
-  if ( parts.length === 2 ) return parts.pop().split( ";" ).shift();
-}
+// function getCookie( name ) {
+//   var value = "; " + document.cookie;
+//   var parts = value.split( "; " + name + "=" );
+//   if ( parts.length === 2 ) return parts.pop().split( ";" ).shift();
+// }
 
 class EmailListContainer extends Component {
   constructor() {
@@ -26,7 +26,6 @@ class EmailListContainer extends Component {
 
     this.state = {
       composing: false,
-      composeEmailFeedback: undefined
     }
   }
 
@@ -37,20 +36,6 @@ class EmailListContainer extends Component {
     // }
 
     this.props.getEmails(this.props.userInfo.loggedInUserId);
-  }
-
-  componentWillReceiveProps( nextProps ) {
-    const message = nextProps.sendEmail.message;
-
-    nextProps.sendEmail.success && this.setState({
-      composing: false,
-      composeEmailFeedback: message,
-    });
-
-    if(!nextProps.sendEmail.success && nextProps.sendEmail.message) {
-
-      this.setState({composeEmailFeedback: message})
-    }
   }
 
   showCompositionView() {
@@ -64,10 +49,6 @@ class EmailListContainer extends Component {
   render() {
     return(
       <div className={ styles.contentContainer }>
-        {
-          this.state.composeEmailFeedback && <div style={{height: 150, width: 200, background: 'blue'}}>{ this.state.composeEmailFeedback }</div>
-        }
-
         {
           this.state.composing === true && <ComposeEmail userId={ this.props.userInfo.userId } hideSelf={ () => this.hideCompositionView() }/>
         }
@@ -87,7 +68,6 @@ class EmailListContainer extends Component {
 function mapStateToProps(state) {
   return {
     emails: state.emails,
-    sendEmail: state.sendEmail,
     userInfo: state.user
   }
 }

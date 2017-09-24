@@ -13,7 +13,6 @@
 }
 
 .composeForm {
-  height: 500px;
   width: 90%;
   max-width: 700px;
   padding: 50px;
@@ -40,14 +39,11 @@
   justify-content: flex-start;
 }
 
-.recipient {
-  margin-bottom: 10px;
-}
-
 .subject, .recipient {
   height: 40px;
   width: 100%;
   min-width: 240px;
+  margin-bottom: 10px;
   outline-width: 1px;
   border-radius: 2px;
   border-color: #E1E1E1;

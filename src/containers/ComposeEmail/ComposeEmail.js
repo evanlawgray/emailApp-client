@@ -29,6 +29,10 @@ class ComposeEmail extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      composeEmailFeedback: undefined
+    }
+
     this.submitEmailForm = this.submitEmailForm.bind( this );
   }
 
@@ -37,9 +41,26 @@ class ComposeEmail extends Component {
     this.props.sendEmail( newValues );
   }
 
+  componentWillReceiveProps( nextProps ) {
+    const message = nextProps.sendEmailInfo.message;
+
+    nextProps.sendEmailInfo.success && this.setState({
+      composeEmailFeedback: message,
+    });
+
+    if(!nextProps.sendEmailInfo.success && nextProps.sendEmailInfo.message) {
+
+      this.setState({composeEmailFeedback: message})
+    }
+  }
+
   render() {
     return (
       <div className={ styles.composeView }>
+        {
+          this.state.composeEmailFeedback && <div style={{height: 150, width: 200, background: 'blue'}}>{ this.state.composeEmailFeedback }</div>
+        }
+
         <h2>Compose</h2>
         <Form onSubmit={ this.props.handleSubmit( this.submitEmailForm ) } className={ styles.composeForm }>
           <div className={ styles.metaFields }>
@@ -88,13 +109,14 @@ class ComposeEmail extends Component {
 }
 
 ComposeEmail.propTypes = {
-  userId: PropTypes.number,
+  userId: PropTypes.string,
   hideSelf: PropTypes.func
 }
 
 function mapStateToProps( state ) {
   return {
     userId: state.user.loggedInUserId,
+    sendEmailInfo: state.sendEmail
   }
 }
 
