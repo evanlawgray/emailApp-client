@@ -7,6 +7,8 @@ import { Form, Field, reduxForm } from 'redux-form';
 
 import FlatButton from 'material-ui/FlatButton';
 
+import EmailFeedback from '../../components/EmailFeedback';
+
 import { _sendEmail } from '../../redux/modules/sendEmail';
 
 import styles from './styles.css';
@@ -30,10 +32,13 @@ class ComposeEmail extends Component {
     super(props);
 
     this.state = {
-      composeEmailFeedback: undefined
+      composeEmailFeedback: undefined,
+      showFeedback: false
     }
 
     this.submitEmailForm = this.submitEmailForm.bind( this );
+    this.showFeedback = this.showFeedback.bind( this );
+
   }
 
   submitEmailForm(values) {
@@ -41,16 +46,50 @@ class ComposeEmail extends Component {
     this.props.sendEmail( newValues );
   }
 
-  componentWillReceiveProps( nextProps ) {
-    const message = nextProps.sendEmailInfo.message;
-
-    nextProps.sendEmailInfo.success && this.setState({
-      composeEmailFeedback: message,
+  showFeedback( message ) {
+    console.log( 'THIS IS !!!!!!!!!!!!!!!!!!!!!!!!', this.state.message, this.state.showFeedback )
+    this.setState({ composeEmailFeedback: message, showFeedback: true }, () => {
+      console.log( 'NOW IT IS !!!!!!!!!!!!!!!!!!!!!!!!', this.state.message, this.state.showFeedback )
     });
 
-    if(!nextProps.sendEmailInfo.success && nextProps.sendEmailInfo.message) {
+    setTimeout( this.setState({
+      showFeedback: false
+    }), 1500 );
+  }
 
-      this.setState({composeEmailFeedback: message})
+  componentDidUpdate( prevProps, prevState ) {
+    if( this.state.composeEmailFeedback && this.state.composeEmailFeedback !== prevState.composeEmailFeedback ) {
+      this.setState({
+        showFeedback: true
+      })
+    }
+
+    setTimeout( () => {
+      this.setState({
+        showFeedback: false
+      });
+
+      this.props.sendEmailInfo.success && this.props.hideSelf();
+    }, 9500);
+
+  }
+
+  componentWillReceiveProps( nextProps ) {
+    const message = nextProps.sendEmailInfo.message;
+    const success = nextProps.sendEmailInfo.success;
+
+    if(success && message) {
+      this.setState({
+        composeEmailFeedback: message,
+      });
+    }
+
+    console.log();
+
+    if(!success && message) {
+      this.setState({
+        composeEmailFeedback: message,
+      });
     }
   }
 
@@ -58,7 +97,7 @@ class ComposeEmail extends Component {
     return (
       <div className={ styles.composeView }>
         {
-          this.state.composeEmailFeedback && <div style={{height: 150, width: 200, background: 'blue'}}>{ this.state.composeEmailFeedback }</div>
+          this.state.showFeedback && <EmailFeedback message={ this.state.composeEmailFeedback } />
         }
 
         <h2>Compose</h2>
