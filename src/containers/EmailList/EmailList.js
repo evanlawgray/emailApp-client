@@ -30,8 +30,6 @@ const EmailList = ({ emails }) => {
           }) :
           <h3>No messages to display...</h3>
       }
-
-
     </Paper>
   )
 }

@@ -2,3 +2,7 @@
   min-height: 100vh;
   min-width: 100vw;
 }
+
+.emailList {
+  padding: 3vh 0;
+}

@@ -50,14 +50,14 @@ class EmailListContainer extends Component {
 
     return(
       <div className={ styles.contentContainer }>
-      <ComposeEmail
-        className={ styles.composeView }
-        active={ composing }
-        userId={ this.props.userInfo.userId }
-        hideSelf={ () => this.hideCompositionView() }
-      />
+        <ComposeEmail
+          className={ styles.composeView }
+          active={ composing }
+          userId={ this.props.userInfo.userId }
+          hideSelf={ () => this.hideCompositionView() }
+        />
 
-        <EmailList emails={ this.props.emails } />
+        <EmailList className={styles.emailList} emails={ this.props.emails } />
         <FloatingActionButton
           style={{ position: 'fixed', right: '10%', bottom: '5%' }}
           onTouchTap={() => this.showCompositionView()}

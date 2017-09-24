@@ -59,7 +59,7 @@ class ComposeEmail extends Component {
       });
 
       this.props.sendEmailInfo.success && this.props.hideSelf();
-    }, 12000);
+    }, 18000);
 
   }
 
