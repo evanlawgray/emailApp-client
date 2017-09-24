@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 
 import { getEmails } from '../../redux/modules/fetchEmails';
@@ -47,11 +46,16 @@ class EmailListContainer extends Component {
   }
 
   render() {
+    const composing = this.state.composing;
+
     return(
       <div className={ styles.contentContainer }>
-        {
-          this.state.composing === true && <ComposeEmail userId={ this.props.userInfo.userId } hideSelf={ () => this.hideCompositionView() }/>
-        }
+      <ComposeEmail
+        className={ styles.composeView }
+        composing={ composing }
+        userId={ this.props.userInfo.userId }
+        hideSelf={ () => this.hideCompositionView() }
+      />
 
         <EmailList emails={ this.props.emails } />
         <FloatingActionButton
