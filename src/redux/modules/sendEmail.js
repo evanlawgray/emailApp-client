@@ -1,22 +1,24 @@
 const rootUrl = 'http://localhost:3001/';
 
-const initialState = [];
+const initialState = {};
 
 const SEND_EMAIL_START = 'SEND_EMAIL_START';
 const SEND_EMAIL_ERROR = 'SEND_EMAIL_ERROR';
 const SEND_EMAIL = 'SEND_EMAIL'
+const CLEAR_EMAIL_FEEDBACK = 'CLEAR_EMAIL_FEEDBACK';
 
 // Action Creators
 
 const sendEmailStart = ( userId ) => ({ type: SEND_EMAIL_START, payload: userId });
 const sendEmailError = ( error ) => ({ type: SEND_EMAIL_ERROR, payload: error });
 const sendEmail = ( emailData ) => ({ type: SEND_EMAIL, payload: emailData });
+const clearEmailFeedback = () => ({ type: CLEAR_EMAIL_FEEDBACK })
 
 // Async function to send Email
 
 export const _sendEmail = ( emailFormValues ) => ( dispatch ) => {
 
-  const { userId, recipient } = emailFormValues;
+  const { userId } = emailFormValues;
 
   dispatch( sendEmailStart( userId ) );
 
@@ -55,7 +57,10 @@ export const _sendEmail = ( emailFormValues ) => ( dispatch ) => {
           dispatch( sendEmailError( errorMessage ) );
         })
     });
+}
 
+export const _clearEmailFeedback= () => (dispatch) => {
+  dispatch( clearEmailFeedback() );
 }
 
 // Reducer
@@ -66,7 +71,7 @@ export function sendEmailReducer ( state = initialState, action ) {
       return {
         isSending: true,
         error: null,
-        success: false,
+        success: null,
         message: null,
       }
     }
@@ -85,6 +90,9 @@ export function sendEmailReducer ( state = initialState, action ) {
         success: false,
         message: action.payload
       }
+    }
+    case CLEAR_EMAIL_FEEDBACK: {
+      return initialState;
     }
     default: {
       return state;

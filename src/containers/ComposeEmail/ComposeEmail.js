@@ -11,6 +11,7 @@ import FlatButton from 'material-ui/FlatButton';
 import EmailFeedback from '../../components/EmailFeedback';
 
 import { _sendEmail } from '../../redux/modules/sendEmail';
+import { _clearEmailFeedback } from '../../redux/modules/sendEmail';
 
 import styles from './styles.css';
 
@@ -58,13 +59,19 @@ class ComposeEmail extends Component {
       });
 
       this.props.sendEmailInfo.success && this.props.hideSelf();
-    }, 6500);
+    }, 12000);
 
   }
 
   componentWillReceiveProps( nextProps ) {
+    const isActive = nextProps.active;
     const message = nextProps.sendEmailInfo.message;
     const success = nextProps.sendEmailInfo.success;
+
+    if(this.props.active === !isActive) {
+      this.props.reset();
+      this.props.clearEmailFeedback();
+    }
 
     if(success && message) {
       this.setState({
@@ -92,7 +99,7 @@ class ComposeEmail extends Component {
           transitionLeaveTimeout={ 150 }
         >
         {
-          this.props.composing &&
+          this.props.active &&
             <div className={ styles.composeView }>
               <EmailFeedback
                 active={ this.state.showFeedback }
@@ -162,7 +169,8 @@ function mapStateToProps( state ) {
 
 function mapDispatchToProps( dispatch ) {
   return {
-    sendEmail: (emailData) => dispatch( _sendEmail( emailData ) )
+    sendEmail: (emailData) => dispatch( _sendEmail( emailData ) ),
+    clearEmailFeedback: () => dispatch( _clearEmailFeedback( ) )
   }
 }
 

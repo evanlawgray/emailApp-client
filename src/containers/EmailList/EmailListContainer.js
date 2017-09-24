@@ -52,7 +52,7 @@ class EmailListContainer extends Component {
       <div className={ styles.contentContainer }>
       <ComposeEmail
         className={ styles.composeView }
-        composing={ composing }
+        active={ composing }
         userId={ this.props.userInfo.userId }
         hideSelf={ () => this.hideCompositionView() }
       />
