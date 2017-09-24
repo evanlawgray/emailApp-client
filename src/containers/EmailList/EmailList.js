@@ -8,7 +8,7 @@ const listStyles = {
   height: 'auto',
   width: '90%',
   maxWidth: 700,
-  margin: '0 auto',
+  margin: '3vh auto',
   padding: 30,
   display: 'flex',
   flexDirection: 'column',
