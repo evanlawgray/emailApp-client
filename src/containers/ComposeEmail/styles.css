@@ -70,7 +70,7 @@
 
 .enter.enterActive {
   opacity: 1;
-  transition: opacity 250ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
 }
 
 .leave {

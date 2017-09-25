@@ -13,6 +13,7 @@ const HeaderBar = () => (
   <AppBar
     style={ appBarStyles }
     title="Email Client"
+    iconElementLeft={ <span style={{ height: 0, width: 0 }}></span> }
     iconElementRight={
       <div>
         <Link to={'/'}>

@@ -50,36 +50,37 @@ class ComposeEmail extends Component {
     if( this.state.composeEmailFeedback && this.state.composeEmailFeedback !== prevState.composeEmailFeedback ) {
       this.setState({
         showFeedback: true
-      })
+      });
     }
 
-    setTimeout( () => {
-      this.setState({
-        showFeedback: false
-      });
+    if( this.props.sendEmailInfo.success ) {
+      setTimeout( () => {
+        this.props.hideSelf();
 
-      this.props.sendEmailInfo.success && this.props.hideSelf();
-    }, 18000);
+        this.setState({
+          showFeedback: false
+        });
+      }, 1800);
+    } else if( !this.props.sendEmailInfo.success ) {
+      setTimeout( () => {
+        this.setState({
+          showFeedback: false
+        });
+      }, 10000)
+    }
 
   }
 
   componentWillReceiveProps( nextProps ) {
     const isActive = nextProps.active;
     const message = nextProps.sendEmailInfo.message;
-    const success = nextProps.sendEmailInfo.success;
 
-    if(this.props.active === !isActive) {
+    if( this.props.active === !isActive ) {
       this.props.reset();
       this.props.clearEmailFeedback();
     }
 
-    if(success && message) {
-      this.setState({
-        composeEmailFeedback: message,
-      });
-    }
-
-    if(!success && message) {
+    if( message ) {
       this.setState({
         composeEmailFeedback: message,
       });
@@ -95,7 +96,7 @@ class ComposeEmail extends Component {
             leave: styles.leave,
             leaveActive: styles.leaveActive
           }}
-          transitionEnterTimeout={ 250 }
+          transitionEnterTimeout={ 150 }
           transitionLeaveTimeout={ 150 }
         >
         {

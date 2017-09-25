@@ -14,8 +14,8 @@ const EmailFeedback = ({ active, message }) => {
             leave: styles.leave,
             leaveActive: styles.leaveActive
           }}
-          transitionEnterTimeout={ 500 }
-          transitionLeaveTimeout={ 500 }
+          transitionEnterTimeout={ 400 }
+          transitionLeaveTimeout={ 400 }
         >
           {
             active && <p key='feedbackText' className={ styles.feedbackText }>{ message }</p>

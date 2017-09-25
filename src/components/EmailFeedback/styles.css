@@ -35,7 +35,7 @@
 .enter.enterActive {
   opacity: 1;
   right: 0;
-  transition: right 300ms ease-in, opacity 500ms ease-in;
+  transition: right 400ms ease-in, opacity 400ms ease-in;
 }
 
 .leave {
@@ -46,5 +46,5 @@
 .leave.leaveActive {
   opacity: 0.1;
   right: -400px;
-  transition: right 300ms ease-in, opacity 500ms ease-in;
+  transition: right 400ms ease-in, opacity 400ms ease-in;
 }
