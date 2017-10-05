@@ -83,7 +83,7 @@ export const _signupUser = ( userInfo ) => ( dispatch ) => {
 
 // REDUCER
 
-export function signupReducer( state=initialState, action ) {
+export function signupReducer( state = initialState, action ) {
   switch( action.type ) {
     case SIGNUP_USER_LOADING:
       return {
@@ -108,7 +108,7 @@ export function signupReducer( state=initialState, action ) {
   }
 }
 
-export function authReducer( state=initialState, action ) {
+export function authReducer( state = initialState, action ) {
   switch( action.type ) {
     case LOGIN_USER_LOADING:
       return {

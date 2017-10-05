@@ -8,11 +8,6 @@ import { connect } from 'react-redux';
 import Login from './Login';
 
 class LoginContainer extends Component {
-  componentDidMount() {
-    console.log('MOUNTED')
-    console.log( 'isLoggedIn:', this.props.isLogged )
-  }
-
   render() {
     const isLoggedIn = this.props.isLoggedIn;
 
@@ -29,6 +24,16 @@ class LoginContainer extends Component {
       )}/>
     );
   }
+}
+
+LoginContainer.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  user: PropTypes.shape({
+    isLoading: PropTypes.bool,
+    error: PropTypes.oneOfType([ PropTypes.bool, PropTypes.symbol ]),
+    isLoggedIn: PropTypes.bool,
+    loggedInUserId: PropTypes.number
+  })
 }
 
 const mapStateToProps = ( state ) => {
