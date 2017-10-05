@@ -32,7 +32,7 @@ LoginContainer.propTypes = {
     isLoading: PropTypes.bool,
     error: PropTypes.oneOfType([ PropTypes.bool, PropTypes.symbol ]),
     isLoggedIn: PropTypes.bool,
-    loggedInUserId: PropTypes.number
+    loggedInUserId: PropTypes.string
   })
 }
 

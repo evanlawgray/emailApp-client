@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
@@ -47,38 +46,29 @@ class ComposeEmail extends Component {
   }
 
   componentDidUpdate( prevProps, prevState ) {
-    if( this.state.composeEmailFeedback && this.state.composeEmailFeedback !== prevState.composeEmailFeedback ) {
+    const emailWasSent = this.props.sendEmailInfo.success;
+
+    if( this.state.composeEmailFeedback && emailWasSent !== prevProps.sendEmailInfo.success ) {
       this.setState({
         showFeedback: true
       });
+
+      if( emailWasSent ) {
+        setTimeout( () => {
+          this.props.hideCompositionView();
+        }, 1800);
+      } else if( emailWasSent === false ) {
+        setTimeout( () => {
+          this.setState({
+            showFeedback: false
+          });
+        }, 10000)
+      }
     }
-
-    if( this.props.sendEmailInfo.success ) {
-      setTimeout( () => {
-        this.props.hideSelf();
-
-        this.setState({
-          showFeedback: false
-        });
-      }, 1800);
-    } else if( !this.props.sendEmailInfo.success ) {
-      setTimeout( () => {
-        this.setState({
-          showFeedback: false
-        });
-      }, 10000)
-    }
-
   }
 
   componentWillReceiveProps( nextProps ) {
-    const isActive = nextProps.active;
     const message = nextProps.sendEmailInfo.message;
-
-    if( this.props.active === !isActive ) {
-      this.props.reset();
-      this.props.clearEmailFeedback();
-    }
 
     if( message ) {
       this.setState({
@@ -89,76 +79,62 @@ class ComposeEmail extends Component {
 
   render() {
     return (
-      <ReactCSSTransitionGroup
-          transitionName={{
-            enter: styles.enter,
-            enterActive: styles.enterActive,
-            leave: styles.leave,
-            leaveActive: styles.leaveActive
-          }}
-          transitionEnterTimeout={ 150 }
-          transitionLeaveTimeout={ 150 }
-        >
-        {
-          this.props.active &&
-            <div className={ styles.composeView }>
-              <EmailFeedback
-                active={ this.state.showFeedback }
-                message={ this.state.composeEmailFeedback }
+      <div className={ styles.composeView }>
+        <EmailFeedback
+          active={ this.state.showFeedback }
+          message={ this.state.composeEmailFeedback }
+        />
+
+        <h2>Compose</h2>
+        <Form onSubmit={ this.props.handleSubmit( this.submitEmailForm ) } className={ styles.composeForm }>
+          <div className={ styles.metaFields }>
+            <div>
+              <Field
+                className={ styles.recipient }
+                name="recipient"
+                component="input"
+                type="text"
+                placeholder="To..."
               />
 
-              <h2>Compose</h2>
-              <Form onSubmit={ this.props.handleSubmit( this.submitEmailForm ) } className={ styles.composeForm }>
-                <div className={ styles.metaFields }>
-                  <div>
-                    <Field
-                      className={ styles.recipient }
-                      name="recipient"
-                      component="input"
-                      type="text"
-                      placeholder="To..."
-                    />
-
-                    <Field
-                      className={ styles.subject }
-                      name="subject"
-                      component="input"
-                      type="text"
-                      placeholder="Subject..."
-                    />
-                  </div>
-                </div>
-
-                <Field
-                  className={ styles.message }
-                  name="message"
-                  component="textarea"
-                  placeholder="Write your message here..."
-                />
-
-                <section className={ styles.buttonContainer }>
-                  <FlatButton
-                    label={ 'Cancel' }
-                    style={ cancelButtonStyles }
-                    onTouchTap={ this.props.hideSelf }
-                  />
-                  <FlatButton
-                    label={ 'Send' }
-                    style={ sendButtonStyles }
-                    type='submit'
-                  />
-                </section>
-              </Form>
+              <Field
+                className={ styles.subject }
+                name="subject"
+                component="input"
+                type="text"
+                placeholder="Subject..."
+              />
             </div>
-        }
-      </ReactCSSTransitionGroup>
+          </div>
+
+          <Field
+            className={ styles.message }
+            name="message"
+            component="textarea"
+            placeholder="Write your message here..."
+          />
+
+          <section className={ styles.buttonContainer }>
+            <FlatButton
+              label={ 'Cancel' }
+              style={ cancelButtonStyles }
+              onTouchTap={ this.props.hideCompositionView }
+            />
+            <FlatButton
+              label={ 'Send' }
+              style={ sendButtonStyles }
+              type='submit'
+            />
+          </section>
+        </Form>
+      </div>
     );
   }
 }
 
 ComposeEmail.propTypes = {
   userId: PropTypes.string,
-  hideSelf: PropTypes.func
+  hideCompositionView: PropTypes.func
 }
 
 function mapStateToProps( state ) {

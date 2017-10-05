@@ -1,5 +1,6 @@
 .composeView {
   position: fixed;
+  top: 64px;
   opacity: 1;
   min-height: 100%;
   width: 100%;
@@ -19,7 +20,7 @@
   padding: 50px;
   margin-bottom: 50px;
   position: relative;
-  z-index: 1000000;
+  z-index: 1000;
   background: white;
   border: 1px solid black;
   display: flex;
@@ -62,22 +63,4 @@
 
 .buttonContainer {
   margin: 20px 0 0;
-}
-
-.enter {
-  opacity: 0.1;
-}
-
-.enter.enterActive {
-  opacity: 1;
-  transition: opacity 150ms ease-in-out;
-}
-
-.leave {
-  opacity: 1;
-}
-
-.leave.leaveActive {
-  opacity: 0.1;
-  transition: opacity 150ms ease-in-out;
 }

@@ -13,6 +13,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from './styles/mui-theme';
 
+import styles from './styles/index.css';
+
 import store from './redux/store';
 
 import MainLayout from './containers/MainLayout';

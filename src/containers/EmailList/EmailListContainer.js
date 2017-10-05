@@ -8,7 +8,6 @@ import CreateIcon from 'material-ui/svg-icons/content/create'
 
 import styles from './styles.css';
 
-import ComposeEmail from '../ComposeEmail/index';
 import EmailList from './EmailList';
 
 // const authCookie = 'email_session';
@@ -20,14 +19,6 @@ import EmailList from './EmailList';
 // }
 
 class EmailListContainer extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      composing: false,
-    }
-  }
-
   componentDidMount() {
 
     // if ( getCookie( authCookie ) ) {
@@ -37,30 +28,13 @@ class EmailListContainer extends Component {
     this.props.getEmails(this.props.userInfo.loggedInUserId);
   }
 
-  showCompositionView() {
-    this.setState({composing: true});
-  }
-
-  hideCompositionView() {
-    this.setState({composing: false});
-  }
-
   render() {
-    const composing = this.state.composing;
-
     return(
       <div className={ styles.contentContainer }>
-        <ComposeEmail
-          className={ styles.composeView }
-          active={ composing }
-          userId={ this.props.userInfo.userId }
-          hideSelf={ () => this.hideCompositionView() }
-        />
-
         <EmailList className={styles.emailList} emails={ this.props.emails } />
         <FloatingActionButton
           style={{ position: 'fixed', right: '10%', bottom: '5%' }}
-          onTouchTap={() => this.showCompositionView()}
+          onTouchTap={() => this.props.showCompositionView()}
         >
           <CreateIcon />
         </FloatingActionButton>
