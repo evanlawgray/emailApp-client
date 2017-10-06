@@ -6,6 +6,8 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import styles from './styles.css';
 
+import { _fetchEmails } from '../../redux/modules/fetchEmails';
+
 import EmailListContainer from '../EmailList';
 import ComposeEmail from '../ComposeEmail/index';
 
@@ -16,6 +18,10 @@ class EmailsViewContainer extends Component {
     this.state = {
       composing: false
     }
+  }
+
+  updateEmailList() {
+    this.props.getEmails( this.props.userInfo.loggedInUserId );
   }
 
   showCompositionView() {
@@ -47,6 +53,7 @@ class EmailsViewContainer extends Component {
               <ComposeEmail
                 userId={ this.props.userInfo.userId }
                 hideCompositionView={ () => this.hideCompositionView() }
+                updateEmailList={ () => this.updateEmailList() }
               />
           }
 
@@ -63,4 +70,12 @@ function mapStateToProps( state ) {
   }
 }
 
-export default connect( mapStateToProps )( EmailsViewContainer );
+function mapDispatchToProps( dispatch ) {
+  return {
+    getEmails: ( userId ) => {
+      dispatch(_fetchEmails( userId ))
+    }
+  }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( EmailsViewContainer );

@@ -45,6 +45,10 @@ class ComposeEmail extends Component {
     this.props.sendEmail( newValues );
   }
 
+  componentWillUnmount() {
+    this.props.updateEmailList();
+  }
+
   componentDidUpdate( prevProps, prevState ) {
     const emailWasSent = this.props.sendEmailInfo.success;
 

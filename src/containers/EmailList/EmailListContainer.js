@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getEmails } from '../../redux/modules/fetchEmails';
+import { _fetchEmails } from '../../redux/modules/fetchEmails';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CreateIcon from 'material-ui/svg-icons/content/create'
@@ -25,13 +25,17 @@ class EmailListContainer extends Component {
     //   this.props.getEmails( this.props.userId );
     // }
 
-    this.props.getEmails(this.props.userInfo.loggedInUserId);
+    this.props.fetchEmails( this.props.userInfo.loggedInUserId );
+  }
+
+  updateEmailList() {
+    this.props.fetchEmails( this.props.userInfo.loggedInUserId );
   }
 
   render() {
     return(
       <div className={ styles.contentContainer }>
-        <EmailList className={styles.emailList} emails={ this.props.emails } />
+        <EmailList className={ styles.emailList } emails={ this.props.emails } />
         <FloatingActionButton
           style={{ position: 'fixed', right: '10%', bottom: '5%' }}
           onTouchTap={() => this.props.showCompositionView()}
@@ -43,19 +47,19 @@ class EmailListContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps( state ) {
   return {
     emails: state.emails,
     userInfo: state.user
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps( dispatch ) {
   return {
-    getEmails: ( userId ) => {
-      dispatch(getEmails( userId ))
+    fetchEmails: ( userId ) => {
+      dispatch(_fetchEmails( userId ))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmailListContainer);
+export default connect( mapStateToProps, mapDispatchToProps )( EmailListContainer );

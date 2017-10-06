@@ -3,9 +3,9 @@ const rootUrl = 'http://localhost:3001/';
 
 const initialState = [];
 
-export const GET_EMAILS = 'GET_EMAILS';
+export const FETCH_EMAILS = 'FETCH_EMAILS';
 
-export const getEmails = ( userId ) => ( dispatch ) => {
+export const _fetchEmails = ( userId ) => ( dispatch ) => {
   fetch( `${ rootUrl }api/emails/${ userId }` )
   .then( response => {
     if ( !response.ok ) return Promise.reject();
@@ -14,7 +14,7 @@ export const getEmails = ( userId ) => ( dispatch ) => {
   .then( json => {
     dispatch(
       {
-        type: GET_EMAILS,
+        type: FETCH_EMAILS,
         payload: {
           emails: [...json]
         }
@@ -27,7 +27,7 @@ export const getEmails = ( userId ) => ( dispatch ) => {
 
 export function emailsReducer( state=initialState, action ) {
   switch( action.type ) {
-    case GET_EMAILS:
+    case FETCH_EMAILS:
       return [...action.payload.emails];
     default:
       return state;
