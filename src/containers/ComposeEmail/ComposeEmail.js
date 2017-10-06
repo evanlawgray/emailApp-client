@@ -66,7 +66,7 @@ class ComposeEmail extends Component {
           this.setState({
             showFeedback: false
           });
-        }, 10000)
+        }, 7000)
       }
     }
   }

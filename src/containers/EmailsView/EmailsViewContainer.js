@@ -25,11 +25,11 @@ class EmailsViewContainer extends Component {
   }
 
   showCompositionView() {
-    this.setState({composing: true});
+    this.setState({ composing: true });
   }
 
   hideCompositionView() {
-    this.setState({composing: false});
+    this.setState({ composing: false });
   }
 
   render() {
