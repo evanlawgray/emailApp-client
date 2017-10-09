@@ -19,8 +19,6 @@ class ImportantIconContainer extends Component {
     const isImportant = this.props.isImportant;
     const messageId = this.props.messageId;
 
-    console.log( this.props.isImportant );
-
     return(
       <div
         className={ styles.importantIcon }

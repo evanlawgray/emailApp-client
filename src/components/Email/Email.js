@@ -7,7 +7,6 @@ import ImportantIcon from '../../containers/ImportantIcon';
 import styles from './styles.css';
 
 const Email = ({ email, isLast }) => {
-  console.log('THIS EMAIL HAS AN ID OF: ', email.id);
   return (
     <div className={ styles.emailContainer }>
       <ImportantIcon isImportant={ email.isimportant } messageId={ email.id }/>
