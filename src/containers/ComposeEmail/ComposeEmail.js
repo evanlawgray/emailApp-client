@@ -29,8 +29,8 @@ const sendButtonStyles = {
 }
 
 class ComposeEmail extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
 
     this.state = {
       composeEmailFeedback: undefined,
@@ -137,8 +137,17 @@ class ComposeEmail extends Component {
 }
 
 ComposeEmail.propTypes = {
-  userId: PropTypes.string,
-  hideCompositionView: PropTypes.func
+  userId: PropTypes.string.isRequired,
+  sendEmailInfo: PropTypes.shape({
+    isSending: PropTypes.bool,
+    error: PropTypes.bool,
+    success: PropTypes.bool,
+    message: PropTypes.string
+  }),
+  hideCompositionView: PropTypes.func.isRequired,
+  updateEmailList: PropTypes.func.isRequired,
+  sendEmail: PropTypes.func.isRequired,
+  clearEmailFeedback: PropTypes.func.isRequired
 }
 
 function mapStateToProps( state ) {
@@ -150,13 +159,13 @@ function mapStateToProps( state ) {
 
 function mapDispatchToProps( dispatch ) {
   return {
-    sendEmail: (emailData) => dispatch( _sendEmail( emailData ) ),
+    sendEmail: ( emailData ) => dispatch( _sendEmail( emailData ) ),
     clearEmailFeedback: () => dispatch( _clearEmailFeedback( ) )
   }
 }
 
 const connectedForm = reduxForm({
   form: 'composeEmail'
-})(ComposeEmail);
+})( ComposeEmail );
 
-export default connect(mapStateToProps, mapDispatchToProps)(connectedForm);
+export default connect( mapStateToProps, mapDispatchToProps )( connectedForm );

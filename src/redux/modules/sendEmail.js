@@ -49,9 +49,8 @@ export const _sendEmail = ( emailFormValues ) => ( dispatch ) => {
       }
       return response.text();
     }).then( ( text ) => {
-
       dispatch( sendEmail( text ) );
-    }, ( error ) => {
+    }, error  => {
       Promise.resolve( error )
         .then( errorMessage => {
           dispatch( sendEmailError( errorMessage ) );

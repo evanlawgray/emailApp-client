@@ -1,10 +1,24 @@
 .emailContainer {
   height: auto;
   width: 100%;
-  display: flex;
-  flex-flow: column nowrap;
+  padding: 10px 0;
+  position: relative;
 }
 
 .fullWidth {
   width: 100%;
+  padding: 10px 0;
+}
+
+.fullWidth p {
+  margin: 0;
+}
+
+.message {
+  width: 100%;
+  margin: 30px 0;
+}
+
+.message p {
+  margin: 0;
 }
