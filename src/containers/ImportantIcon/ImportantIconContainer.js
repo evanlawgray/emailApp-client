@@ -11,7 +11,6 @@ import ImportantIcon from './ImportantIcon';
 
 class ImportantIconContainer extends Component {
   toggleImportance() {
-    console.log('from component, userID is:', this.props.userId);
     this.props.markAsImportant( this.props.messageId, this.props.userId );
   }
 
