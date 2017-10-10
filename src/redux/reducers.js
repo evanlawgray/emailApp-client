@@ -5,6 +5,7 @@ import { emailsReducer } from './modules/fetchEmails';
 import { sendEmailReducer } from './modules/sendEmail';
 import { signupReducer, authReducer } from './modules/auth';
 import { markImportantReducer } from './modules/markImportant';
+import { deleteEmailReducer } from './modules/deleteEmail';
 
 export default combineReducers({
   emails: emailsReducer,
@@ -12,6 +13,7 @@ export default combineReducers({
   user: authReducer,
   signUp: signupReducer,
   markAsImportant: markImportantReducer,
+  deleteEmail: deleteEmailReducer,
   form: reduxFormReducer
 });
 

@@ -31,7 +31,9 @@ class ImportantIconContainer extends Component {
 }
 
 ImportantIconContainer.propTypes = {
-  isImportant: PropTypes.bool
+  isImportant: PropTypes.bool,
+  userId: PropTypes.string.isRequired,
+  markAsImportant: PropTypes.func
 }
 
 function mapStateToProps( state ) {

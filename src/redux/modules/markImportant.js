@@ -17,8 +17,6 @@ const makeImportant = ( messageId ) => ({ type: MAKE_IMPORTANT, payload: message
 // Async function to mark message as important
 
 export const _markAsImportant = ( messageId, userId ) => ( dispatch ) => {
-  const user = userId;
-  console.log('userID is: ', user);
   dispatch( makeImportantStart( messageId ) );
 
   const headers = new Headers({
@@ -40,9 +38,9 @@ export const _markAsImportant = ( messageId, userId ) => ( dispatch ) => {
   fetch( myRequest )
     .then( response => {
       if( !response.ok ) {
-        const errorPromise = response.text();
+        const errorText = response.text();
 
-        return Promise.reject( errorPromise )
+        return Promise.reject( errorText )
       }
 
       return response.text();
