@@ -122,8 +122,13 @@ class ComposeEmail extends Component {
             <FlatButton
               label={ 'Cancel' }
               style={ cancelButtonStyles }
-              onTouchTap={ this.props.hideCompositionView }
+              onTouchTap={
+                this.props.sendEmailInfo.isSending ?
+                  () => false :
+                  this.props.hideCompositionView
+              }
             />
+
             <FlatButton
               label={ 'Send' }
               style={ sendButtonStyles }
