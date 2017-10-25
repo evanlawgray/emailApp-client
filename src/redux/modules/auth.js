@@ -33,8 +33,7 @@ export const _loginUser = ( userInfo ) => ( dispatch ) => {
     method: 'POST',
     headers: headers,
     body: payload,
-    cache: 'default',
-    credentials: 'true'
+    cache: 'default'
   };
 
   const request = new Request( `${rootUrl}auth/login`,init );
@@ -63,8 +62,8 @@ export const _signupUser = ( userInfo ) => ( dispatch ) => {
     method: 'POST',
     headers: headers,
     body: payload,
-    cache: 'default',
-    credentials: 'true'
+    mode: 'cors',
+    cache: 'default'
   };
 
   const request = new Request( `${rootUrl}auth/signup`, init );

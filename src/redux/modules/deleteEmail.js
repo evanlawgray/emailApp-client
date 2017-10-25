@@ -29,8 +29,7 @@ export const _deleteEmail = ( messageId, userId ) => ( dispatch ) => {
     method: 'POST',
     headers: headers,
     body: payload,
-    cache: 'default',
-    credentials: 'true'
+    cache: 'default'
   }
 
   const myRequest = new Request( `${ rootUrl }api/deleteEmail`, init );
