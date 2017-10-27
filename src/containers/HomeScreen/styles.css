@@ -1,14 +1,15 @@
 .contentContainer {
   width: 100vw;
   height: auto;
+  min-height: 100vh;
   padding-top: 65px;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
 .welcomeHeader {
-  margin-top: 20%;
+  /*margin-top: 25vh;*/
   color: darkgray;
 }

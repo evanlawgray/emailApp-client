@@ -3,30 +3,13 @@ import { PropTypes } from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { Form, Field, reduxForm } from 'redux-form';
-
-import FlatButton from 'material-ui/FlatButton';
-
+import EmailForm from './ComposeEmailForm';
 import EmailFeedback from '../../components/EmailFeedback';
 
 import { _sendEmail } from '../../redux/modules/sendEmail';
 import { _clearEmailFeedback } from '../../redux/modules/sendEmail';
 
 import styles from './styles.css';
-
-const cancelButtonStyles = {
-  height: '50px',
-  width: '130px',
-  margin: '0',
-  padding: '10px'
-}
-
-const sendButtonStyles = {
-  height: '50px',
-  width: '130px',
-  margin: '0',
-  padding: '10px'
-}
 
 class ComposeEmail extends Component {
   constructor( props ) {
@@ -82,6 +65,7 @@ class ComposeEmail extends Component {
   }
 
   render() {
+
     return (
       <div className={ styles.composeView }>
         <EmailFeedback
@@ -90,52 +74,11 @@ class ComposeEmail extends Component {
         />
 
         <h2>Compose</h2>
-        <Form onSubmit={ this.props.handleSubmit( this.submitEmailForm ) } className={ styles.composeForm }>
-          <div className={ styles.metaFields }>
-            <div>
-              <Field
-                className={ styles.recipient }
-                name="recipient"
-                component="input"
-                type="text"
-                placeholder="To..."
-              />
-
-              <Field
-                className={ styles.subject }
-                name="subject"
-                component="input"
-                type="text"
-                placeholder="Subject..."
-              />
-            </div>
-          </div>
-
-          <Field
-            className={ styles.message }
-            name="message"
-            component="textarea"
-            placeholder="Write your message here..."
-          />
-
-          <section className={ styles.buttonContainer }>
-            <FlatButton
-              label={ 'Cancel' }
-              style={ cancelButtonStyles }
-              onTouchTap={
-                this.props.sendEmailInfo.isSending ?
-                  () => false :
-                  this.props.hideCompositionView
-              }
-            />
-
-            <FlatButton
-              label={ 'Send' }
-              style={ sendButtonStyles }
-              type='submit'
-            />
-          </section>
-        </Form>
+        <EmailForm
+          submitEmailForm={ this.submitEmailForm }
+          hideCompositionView={ this.props.hideCompositionView }
+          emailStatus={ this.props.sendEmailInfo }
+        />
       </div>
     );
   }
@@ -169,8 +112,4 @@ function mapDispatchToProps( dispatch ) {
   }
 }
 
-const connectedForm = reduxForm({
-  form: 'composeEmail'
-})( ComposeEmail );
-
-export default connect( mapStateToProps, mapDispatchToProps )( connectedForm );
+export default connect( mapStateToProps, mapDispatchToProps )( ComposeEmail );

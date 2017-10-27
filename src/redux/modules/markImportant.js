@@ -29,7 +29,8 @@ export const _markAsImportant = ( messageId, userId ) => ( dispatch ) => {
     method: 'POST',
     headers: headers,
     body: payload,
-    cache: 'default'
+    cache: 'default',
+    credentials: 'include'
   }
 
   const myRequest = new Request( `${ rootUrl }api/updateImportance`, init );

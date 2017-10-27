@@ -10,21 +10,8 @@ import styles from './styles.css';
 
 import EmailList from './EmailList';
 
-// const authCookie = 'email_session';
-
-// function getCookie( name ) {
-//   var value = "; " + document.cookie;
-//   var parts = value.split( "; " + name + "=" );
-//   if ( parts.length === 2 ) return parts.pop().split( ";" ).shift();
-// }
-
 class EmailListContainer extends Component {
   componentDidMount() {
-
-    // if ( getCookie( authCookie ) ) {
-    //   this.props.getEmails( this.props.userId );
-    // }
-
     this.props.fetchEmails( this.props.userInfo.loggedInUserId );
   }
 

@@ -6,7 +6,13 @@ const initialState = [];
 export const FETCH_EMAILS = 'FETCH_EMAILS';
 
 export const _fetchEmails = ( userId ) => ( dispatch ) => {
-  fetch( `${ rootUrl }api/emails/${ userId }` )
+  const init = {
+    credentials: 'include'
+  };
+
+  const request = new Request( `${rootUrl}api/emails/${userId}`, init );
+
+  fetch( request )
   .then( response => {
     if ( !response.ok ) return Promise.reject();
     return response.json();

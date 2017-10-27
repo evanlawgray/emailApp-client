@@ -23,7 +23,6 @@ const buttonStyles = {
 const formContainerStyles = {
   width: '500px',
   margin: '0 auto',
-  marginTop: '10%',
   padding: '20px',
   paddingTop: '30px',
   display: 'flex',
@@ -51,7 +50,7 @@ class Login extends Gandalf {
         validators: ['required'],
         errorPropName: 'errorText',
         props: {
-          hintText: 'Email',
+          hintText: 'Password',
           type: 'password'
         },
         debounce: 300

@@ -1,0 +1,9 @@
+.textInput {
+  height: 40px;
+  width: 100%;
+  min-width: 240px;
+  margin-bottom: 10px;
+  outline-width: 1px;
+  border-radius: 2px;
+  border-color: #E1E1E1;
+}

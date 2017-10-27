@@ -34,7 +34,8 @@ export const _sendEmail = ( emailFormValues ) => ( dispatch ) => {
     method: 'POST',
     headers: headers,
     body: payload,
-    cache: 'default'
+    cache: 'default',
+    credentials: 'include'
   };
 
   const request = new Request( `${rootUrl}api/sendEmail`, init )

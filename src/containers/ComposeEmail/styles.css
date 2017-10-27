@@ -41,26 +41,6 @@
   justify-content: flex-start;
 }
 
-.subject, .recipient {
-  height: 40px;
-  width: 100%;
-  min-width: 240px;
-  margin-bottom: 10px;
-  outline-width: 1px;
-  border-radius: 2px;
-  border-color: #E1E1E1;
-}
-
-.message {
-  height: 70%;
-  min-height: 240px;
-  width: 100%;
-  min-width: 240px;
-  outline-width: 1px;
-  border-radius: 2px;
-  border-color: darkgray;
-}
-
 .buttonContainer {
   margin: 20px 0 0;
 }

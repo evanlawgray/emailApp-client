@@ -1,0 +1,9 @@
+.message {
+  height: 70%;
+  min-height: 240px;
+  width: 100%;
+  min-width: 240px;
+  outline-width: 1px;
+  border-radius: 2px;
+  border-color: darkgray;
+}

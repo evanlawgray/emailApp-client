@@ -22,7 +22,7 @@ export const _loginUser = ( userInfo ) => ( dispatch ) => {
   dispatch( loginUserLoading() );
 
   const headers = new Headers({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   });
 
   const payload = JSON.stringify({
@@ -33,7 +33,8 @@ export const _loginUser = ( userInfo ) => ( dispatch ) => {
     method: 'POST',
     headers: headers,
     body: payload,
-    cache: 'default'
+    cache: 'default',
+    credentials: 'include'
   };
 
   const request = new Request( `${rootUrl}auth/login`,init );
