@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.css'
 
-import HeaderBar from '../../components/HeaderBar';
+import HeaderBar from '../../containers/HeaderBar';
 
 const MainLayout = ({ children }) => {
   return (
