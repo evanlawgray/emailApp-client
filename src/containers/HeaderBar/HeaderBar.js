@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
+import { _logoutUser } from '../../redux/modules/auth';
+
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -25,15 +27,19 @@ class HeaderBar extends Component {
             {
               this.props.userInfo.isLoggedIn ?
                 <Link to={'/logout'}>
-                  <FlatButton label="Logout" style={buttonStyles} />
+                  <FlatButton
+                    label="Logout"
+                    style={ buttonStyles }
+                    onTouchTap={ () => this.props.logoutUser( this.props.userInfo.loggedInUserId ) }
+                  />
                 </Link> :
                 <div style={ buttonContainer }>
                   <Link to={'/login'}>
-                    <FlatButton label="Login" style={buttonStyles} />
+                    <FlatButton label="Login" style={ buttonStyles } />
                   </Link>
 
                   <Link to={'/signup'}>
-                    <FlatButton label="Signup" style={buttonStyles} />
+                    <FlatButton label="Signup" style={ buttonStyles } />
                   </Link>
                 </div>
             }
@@ -50,4 +56,10 @@ function mapStateToProps( state ) {
   }
 }
 
-export default connect(mapStateToProps)(HeaderBar);
+function mapDispatchToProps( dispatch ) {
+  return {
+    logoutUser: ( userId ) => dispatch(_logoutUser( userId ))
+  }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( HeaderBar );

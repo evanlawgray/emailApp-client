@@ -1,6 +1,12 @@
+import { _clearEmails } from './fetchEmails';
+
 export const LOGIN_USER_LOADING = 'LOGIN_USER_LOADING';
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
 export const LOGIN_USER = 'LOGIN_USER';
+
+export const LOGOUT_USER_LOADING = 'LOGOUT_USER_LOADING';
+export const LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 export const SIGNUP_USER_LOADING = 'SIGNUP_USER_LOADING';
 export const SIGNUP_USER_ERROR = 'SIGNUP_USER_ERROR';
@@ -13,6 +19,8 @@ const initialState ={};
 const loginUserLoading = () => ({type: LOGIN_USER_LOADING});
 const loginUserError = ( error ) => ({type: LOGIN_USER_ERROR, payload: error});
 const loginUser = ( userInfo ) => ({type: LOGIN_USER, payload: userInfo});
+
+const logoutUser = () => ({type: LOGOUT_USER});
 
 const signupUserLoading = () => ({type: SIGNUP_USER_LOADING});
 const signupUserError = ( error ) => ({type: SIGNUP_USER_ERROR, payload: error});
@@ -48,6 +56,13 @@ export const _loginUser = ( userInfo ) => ( dispatch ) => {
     }).catch( error => dispatch( loginUserError( error ) ) );
 }
 
+export const _logoutUser = ( userId ) => ( dispatch ) => {
+  document.cookie = `email_session=; expires=${new Date(0).toGMTString()};`
+
+  dispatch( logoutUser( ) );
+  _clearEmails( dispatch );
+}
+
 export const _signupUser = ( userInfo ) => ( dispatch ) => {
   dispatch( signupUserLoading() );
 
@@ -64,7 +79,8 @@ export const _signupUser = ( userInfo ) => ( dispatch ) => {
     headers: headers,
     body: payload,
     mode: 'cors',
-    cache: 'default'
+    cache: 'default',
+    credentials: 'include'
   };
 
   const request = new Request( `${rootUrl}auth/signup`, init );
@@ -130,6 +146,13 @@ export function authReducer( state = initialState, action ) {
         error: false,
         isLoggedIn: true,
         loggedInUserId: action.payload,
+      }
+    case LOGOUT_USER:
+      return {
+        isLoading: false,
+        error: false,
+        isLoggedIn: false,
+        loggedInUserId: null
       }
     default:
       return state;
