@@ -30,51 +30,53 @@ const ComposeEmailForm = props => {
 
   return (
     <Form onSubmit={ handleSubmit( submitEmailForm ) } className={ styles.composeForm }>
-          <div className={ styles.metaFields }>
-            <div>
-              <Field
-                name="recipient"
-                component={ TextInput }
-                type="text"
-                placeholder="To..."
-              />
+      <h2 className={styles.composeBoxHeader}>Compose</h2>
 
-              <Field
-                name="subject"
-                component={ TextInput }
-                type="text"
-                placeholder="Subject..."
-              />
-            </div>
-          </div>
-
+      <div className={ styles.metaFields }>
+        <div>
           <Field
-            className={ styles.message }
-            name="message"
-            component={ TextArea }
-            placeholder="Write your message here..."
+            name="recipient"
+            component={ TextInput }
+            type="text"
+            placeholder="To..."
           />
 
-          <section className={ styles.buttonContainer }>
-            <FlatButton
-              label={ 'Cancel' }
-              style={ cancelButtonStyles }
-              disabled={ submitting }
-              onTouchTap={
-                emailStatus.isSending ?
-                  () => false :
-                  hideCompositionView
-              }
-            />
+          <Field
+            name="subject"
+            component={ TextInput }
+            type="text"
+            placeholder="Subject..."
+          />
+        </div>
+      </div>
 
-            <FlatButton
-              label={ 'Send' }
-              style={ sendButtonStyles }
-              type='submit'
-              disabled={ pristine || submitting }
-            />
-          </section>
-        </Form>
+      <Field
+        className={ styles.message }
+        name="message"
+        component={ TextArea }
+        placeholder="Write your message here..."
+      />
+
+      <section className={ styles.buttonContainer }>
+        <FlatButton
+          label={ 'Cancel' }
+          style={ cancelButtonStyles }
+          disabled={ submitting }
+          onTouchTap={
+            emailStatus.isSending ?
+              () => false :
+              hideCompositionView
+          }
+        />
+
+        <FlatButton
+          label={ 'Send' }
+          style={ sendButtonStyles }
+          type='submit'
+          disabled={ pristine || submitting }
+        />
+      </section>
+    </Form>
   )
 }
 

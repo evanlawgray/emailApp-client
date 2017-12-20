@@ -32,35 +32,28 @@ class ComposeEmail extends Component {
     this.props.updateEmailList();
   }
 
-  componentDidUpdate( prevProps, prevState ) {
-    const emailWasSent = this.props.sendEmailInfo.success;
+  componentWillReceiveProps( nextProps ) {
+    const message = nextProps.sendEmailInfo.message;
 
-    if( this.state.composeEmailFeedback && emailWasSent !== prevProps.sendEmailInfo.success ) {
+    if( message && this.props.sendEmailInfo.success !== nextProps.sendEmailInfo.success ) {
       this.setState({
+        composeEmailFeedback: message,
         showFeedback: true
       });
+
+      const emailWasSent = nextProps.sendEmailInfo.success;
 
       if( emailWasSent ) {
         setTimeout( () => {
           this.props.hideCompositionView();
         }, 1800);
-      } else if( emailWasSent === false ) {
+      } else {
         setTimeout( () => {
           this.setState({
             showFeedback: false
           });
         }, 7000)
       }
-    }
-  }
-
-  componentWillReceiveProps( nextProps ) {
-    const message = nextProps.sendEmailInfo.message;
-
-    if( message ) {
-      this.setState({
-        composeEmailFeedback: message,
-      });
     }
   }
 
@@ -73,7 +66,6 @@ class ComposeEmail extends Component {
           message={ this.state.composeEmailFeedback }
         />
 
-        <h2>Compose</h2>
         <EmailForm
           submitEmailForm={ this.submitEmailForm }
           hideCompositionView={ this.props.hideCompositionView }

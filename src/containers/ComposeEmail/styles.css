@@ -29,6 +29,10 @@
   align-items: baseline
 }
 
+.composeBoxHeader {
+  margin: 0 auto 30px;
+}
+
 .fieldsContainer {
   padding: 10px 0;
 }
