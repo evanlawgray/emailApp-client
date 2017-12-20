@@ -100,7 +100,6 @@ ComposeEmail.propTypes = {
 
 function mapStateToProps( state ) {
   return {
-    userId: state.user.loggedInUserId,
     sendEmailInfo: state.sendEmail
   }
 }

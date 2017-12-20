@@ -9,7 +9,7 @@ import styles from './styles.css';
 import { _fetchEmails } from '../../redux/modules/fetchEmails';
 
 import EmailListContainer from '../EmailList';
-import ComposeEmail from '../ComposeEmail/index';
+import ComposeEmail from '../ComposeEmail';
 
 class EmailsViewContainer extends Component {
   constructor( props ) {
@@ -19,9 +19,9 @@ class EmailsViewContainer extends Component {
       composing: false
     }
   }
-
   updateEmailList() {
-    this.props.getEmails( this.props.userInfo.loggedInUserId );
+    console.log('FROM updateEmailList:', this.props.userId);
+    this.props.getEmails( this.props.userId );
   }
 
   showCompositionView() {
@@ -51,13 +51,13 @@ class EmailsViewContainer extends Component {
           {
             composing &&
               <ComposeEmail
-                userId={ this.props.userInfo.userId }
+                userId={ this.props.userId }
                 hideCompositionView={ () => this.hideCompositionView() }
                 updateEmailList={ () => this.updateEmailList() }
               />
           }
 
-          <EmailListContainer showCompositionView={ () => this.showCompositionView() } />
+          <EmailListContainer userId={this.props.userId} showCompositionView={ () => this.showCompositionView() } />
         </ReactCSSTransitionGroup>
       </div>
     )

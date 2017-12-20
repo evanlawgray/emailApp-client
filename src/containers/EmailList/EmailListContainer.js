@@ -12,11 +12,11 @@ import EmailList from './EmailList';
 
 class EmailListContainer extends Component {
   componentDidMount() {
-    this.props.fetchEmails( this.props.userInfo.loggedInUserId );
+    this.props.fetchEmails( this.props.userId );
   }
 
   updateEmailList() {
-    this.props.fetchEmails( this.props.userInfo.loggedInUserId );
+    this.props.fetchEmails( this.props.userId );
   }
 
   render() {
@@ -36,8 +36,7 @@ class EmailListContainer extends Component {
 
 function mapStateToProps( state ) {
   return {
-    emails: state.emails,
-    userInfo: state.user
+    emails: state.emails
   }
 }
 

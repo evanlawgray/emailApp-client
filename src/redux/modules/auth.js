@@ -18,7 +18,7 @@ const initialState ={};
 
 const loginUserLoading = () => ({type: LOGIN_USER_LOADING});
 const loginUserError = ( error ) => ({type: LOGIN_USER_ERROR, payload: error});
-const loginUser = ( userInfo ) => ({type: LOGIN_USER, payload: userInfo});
+export const loginUser = ( userInfo ) => ({type: LOGIN_USER, payload: userInfo});
 
 const logoutUser = () => ({type: LOGOUT_USER});
 
@@ -58,6 +58,7 @@ export const _loginUser = ( userInfo ) => ( dispatch ) => {
 
 export const _logoutUser = ( userId ) => ( dispatch ) => {
   document.cookie = `email_session=; expires=${new Date(0).toGMTString()};`
+  document.cookie = 'user_id=;';
 
   dispatch( logoutUser( ) );
   _clearEmails( dispatch );
